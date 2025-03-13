@@ -3,6 +3,7 @@ module appli.javafxtodolist {
     requires javafx.fxml;
 
     requires org.kordamp.bootstrapfx.core;
+    requires java.sql;
 
     opens appli to javafx.fxml;
     exports appli;
