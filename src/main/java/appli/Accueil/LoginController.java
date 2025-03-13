@@ -1,8 +1,11 @@
 package appli.Accueil;
 
+import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
 
 public class LoginController {
     @FXML
@@ -41,8 +44,8 @@ public class LoginController {
 
 
     @FXML
-    protected void onInscriptionButtonClick() {
-
+    protected void onInscriptionButtonClick() throws IOException {
+        StartApplication.changeScene("Accueil/Signin");
         error.setText("Vous êtes en redirection.");
     }
 

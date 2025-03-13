@@ -26,10 +26,9 @@ public class StartApplication extends Application {
 
         launch();
     }
-
-    public static void changeScene(String Signin ) throws IOException {
+    public static void changeScene(String nomDuFichierFxml ) throws IOException {
         FXMLLoader fxmlLoader = new
-                FXMLLoader(StartApplication.class.getResource(Signin + "View.fxml"));
+                FXMLLoader(StartApplication.class.getResource(nomDuFichierFxml + "View.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         mainStage.setScene(scene);
     }
