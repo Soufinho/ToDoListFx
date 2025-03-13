@@ -27,7 +27,16 @@ public class LoginController {
     @FXML
     protected void onConnexionButtonClick() {
 
-        error.setText("Vous avez réussi à vous connecter");
+        System.out.println(entermail.getText());
+        System.out.println(entermdp.getText());
+
+        if (entermail.getText().equals("pomme@gmail.com") && entermdp.getText().equals("Azerty1234")) {
+            System.out.println("Connexion !");
+            error.setText("Vous avez réussi à vous connecter");
+        }else{
+            System.out.println("Connexion refusé");
+            error.setText("Erreur: Email ou mot de passe incorrect");
+        }
     }
 
 
@@ -42,5 +51,6 @@ public class LoginController {
 
         error.setText("Force à toi");
     }
+
 
 }
