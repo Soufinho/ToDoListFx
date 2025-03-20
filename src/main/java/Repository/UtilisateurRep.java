@@ -42,7 +42,13 @@ public class UtilisateurRep {
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
-                new Utilisateur();
+                new Utilisateur(
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("mdp"),
+                        rs.getString("role")
+                );
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -58,7 +64,13 @@ public class UtilisateurRep {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
-                Utilisateur u = new Utilisateur();
+                Utilisateur u = new Utilisateur(
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("mdp"),
+                        rs.getString("role")
+                );
                 utilisateurs.add(u);
             }
             return utilisateurs;
@@ -66,7 +78,39 @@ public class UtilisateurRep {
             throw new RuntimeException(e);
         }
 
-        return utilisateurs;
     }
 
+    public void supprimerUtilisateurParEmail(String email) {
+        String sql = "DELETE FROM utilisateurs WHERE email = ?";
+        try{
+            PreparedStatement stmt = connexion.prepareStatement(sql);
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()) {
+                new Utilisateur(
+                        rs.getString("nom"),
+                        rs.getString("prenom"),
+                        rs.getString("email"),
+                        rs.getString("mdp"),
+                        rs.getString("role")
+                );
+                System.out.println("L'utilisateur a été supprimé.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void mettreAJourUtilisateur(Utilisateur utilisateur) {
+        String sql = "UPDATE utilisateurs SET nom = ?, prenom = ?, role = ? WHERE email = ?";
+        try{
+            PreparedStatement stmt = connexion.prepareStatement(sql);
+            stmt.setString(1, utilisateur.getNom());
+            stmt.setString(2, utilisateur.getPrenom());
+            stmt.setString(3, utilisateur.getRole());
+            stmt.setString(4, utilisateur.getEmail());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

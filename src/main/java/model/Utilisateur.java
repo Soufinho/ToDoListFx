@@ -1,9 +1,7 @@
 package model;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-public abstract class Utilisateur extends Application {
+public  class Utilisateur  {
     private String nom;
     private String prenom;
     private String email;
@@ -11,10 +9,6 @@ public abstract class Utilisateur extends Application {
     private int id;
     private String role;
 
-    public static void main(String[] args) {
-
-        launch(args);
-    }
 
     @Override
     public String toString() {
