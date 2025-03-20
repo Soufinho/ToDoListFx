@@ -15,7 +15,7 @@ import static database.Database.getConnexion;
 public class UtilisateurRep {
     private Connection connexion;
 
-    public UtilisateurRep(Connection connexion) {
+    public UtilisateurRep() {
         this.connexion= getConnexion();
     }
 

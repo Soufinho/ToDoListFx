@@ -1,5 +1,7 @@
 package appli.Accueil;
 
+import Repository.UtilisateurRep;
+import model.Utilisateur;
 import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -8,6 +10,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class LoginController {
+    private UtilisateurRep utilisateurRepository = new UtilisateurRep();
     @FXML
     private Label yourmail;
 
@@ -28,17 +31,22 @@ public class LoginController {
 
 
     @FXML
-    protected void onConnexionButtonClick() {
+    protected void onConnexionButtonClick() throws IOException {
 
         System.out.println(entermail.getText());
         System.out.println(entermdp.getText());
-
-        if (entermail.getText().equals("pomme@gmail.com") && entermdp.getText().equals("Azerty1234")) {
-            System.out.println("Connexion !");
+        Utilisateur utilisateur = utilisateurRepository.getUtilisateurParEmail(entermail.getText());
+        if (utilisateur == null) {
+            System.out.println("Aucun utilisateur trouvé");
+            error.setText("Utilisateur non trouvé");
+        }else if(utilisateur != null && (entermdp.getText().equals(utilisateur.getMdp()))){
+            System.out.println("Connexion reussi");
             error.setText("Vous avez réussi à vous connecter");
-        }else{
-            System.out.println("Connexion refusé");
-            error.setText("Erreur: Email ou mot de passe incorrect");
+            StartApplication.changeScene("Accueil");
+            error.setText("Vous êtes en redirection.");
+        }else {
+            error.setText("Le mot de passe est incorrect");
+            System.out.println("Le mot de passe est incorrect");
         }
     }
 
