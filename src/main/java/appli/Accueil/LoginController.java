@@ -6,6 +6,7 @@ import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 
@@ -36,10 +37,11 @@ public class LoginController {
         System.out.println(entermail.getText());
         System.out.println(entermdp.getText());
         Utilisateur utilisateur = utilisateurRepository.getUtilisateurParEmail(entermail.getText());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         if (utilisateur == null) {
             System.out.println("Aucun utilisateur trouvé");
             error.setText("Utilisateur non trouvé");
-        }else if(utilisateur != null && (entermdp.getText().equals(utilisateur.getMdp()))){
+        }else if(utilisateur != null && encoder.matches((CharSequence) entermdp,utilisateur.getMdp() )){
             System.out.println("Connexion reussi");
             error.setText("Vous avez réussi à vous connecter");
             StartApplication.changeScene("Accueil");

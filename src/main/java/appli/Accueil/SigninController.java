@@ -1,14 +1,18 @@
 package appli.Accueil;
 
+import Repository.UtilisateurRep;
+import model.Utilisateur;
 import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 
 public class SigninController  {
+    private UtilisateurRep utilisateurRepository = new UtilisateurRep();
     @FXML
     private Label inscription;
     @FXML
@@ -40,13 +44,23 @@ public class SigninController  {
 
         System.out.println(getemail.getText());
         System.out.println(getmdp.getText());
-
-        if (getemail.getText().equals("pomme@gmail.com") && getmdp.getText().equals("Azerty1234")) {
-            System.out.println("Inscription OK !");
-            erreur.setText("Vous avez réussis à vous inscrire");
-        }else{
+        System.out.println(getconfirm.getText());
+        System.out.println(getnom.getText());
+        System.out.println(getprenom.getText());
+        Utilisateur utilisateur = utilisateurRepository.getUtilisateurParEmail(getemail.getText());
+        if(getemail.getText().isEmpty() || getmdp.getText().isEmpty() || getconfirm.getText().isEmpty() || getnom.getText().isEmpty()) {
             System.out.println("Inscription refusé.");
-            erreur.setText("Erreur: Remplissez bien tout les champs.");
+            erreur.setText("Tous les champs doivent être remplis");
+        } else if (!getmdp.getText().equals( getconfirm.getText())) {
+            System.out.println("Inscription refusé.");
+            erreur.setText("Les mots de passes doivent correspondre");
+        } else if(utilisateurRepository.getUtilisateurParEmail(getemail.getText()) != null) {
+            System.out.println("Inscription refusé.");
+            erreur.setText("L'email existe deja dans la base");
+        }else{
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String hashedPassword = encoder.encode(getmdp.getText());
+            utilisateurRepository.ajouterUtilisateur(utilisateur);
         }
     }
 
