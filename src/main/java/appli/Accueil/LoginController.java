@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import session.SessionUtilisateur;
 import java.io.IOException;
 
 public class LoginController {
@@ -38,18 +38,22 @@ public class LoginController {
         System.out.println(entermdp.getText());
         Utilisateur utilisateur = utilisateurRepository.getUtilisateurParEmail(entermail.getText());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        if (utilisateur == null) {
-            System.out.println("Aucun utilisateur trouvé");
-            error.setText("Utilisateur non trouvé");
-        }else if(utilisateur != null && encoder.matches((CharSequence) entermdp,utilisateur.getMdp() )){
-            System.out.println("Connexion reussi");
-            error.setText("Vous avez réussi à vous connecter");
-            StartApplication.changeScene("Accueil");
-            error.setText("Vous êtes en redirection.");
-        }else {
-            error.setText("Le mot de passe est incorrect");
-            System.out.println("Le mot de passe est incorrect");
+        if (utilisateur != null && encoder.matches((CharSequence) entermdp, utilisateur.getMdp())) {
+            System.out.println("Connexion réussie pour : " + utilisateur.getNom());
+            SessionUtilisateur.getInstance().sauvegardeSession(utilisateur);
+            error.setVisible(false);
+            // Redirection possible vers une autre page
+        } else {
+            System.out.println("Échec de la connexion. Email ou mot de passe incorrect.");
+            error.setText("Email ou mot de passe incorrect.");
+            error.setVisible(true);
         }
+        Utilisateur utilisateurActuel = SessionUtilisateur.getInstance().getUtilisateur();
+        if (utilisateurActuel != null) {
+            System.out.println("Utilisateur connecté : " + utilisateurActuel.getNom());
+        }
+
+
     }
 
 
