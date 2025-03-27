@@ -1,6 +1,7 @@
 package Repository;
 
 
+import javafx.scene.control.TableView;
 import model.Utilisateur;
 
 import java.sql.Connection;
@@ -14,6 +15,7 @@ import static database.Database.getConnexion;
 
 public class UtilisateurRep {
     private Connection connexion;
+    private TableView<Object> tableauUser;
 
     public UtilisateurRep() {
         this.connexion= getConnexion();
@@ -72,6 +74,7 @@ public class UtilisateurRep {
                         rs.getString("role")
                 );
                 utilisateurs.add(u);
+                tableauUser.getItems().addAll(utilisateurs);
             }
             return utilisateurs;
         } catch (SQLException e) {
