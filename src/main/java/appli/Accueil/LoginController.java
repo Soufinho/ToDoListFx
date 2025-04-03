@@ -38,7 +38,7 @@ public class LoginController {
         System.out.println(entermdp.getText());
         Utilisateur utilisateur = utilisateurRepository.getUtilisateurParEmail(entermail.getText());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        if (utilisateur != null && encoder.matches((CharSequence) entermdp, utilisateur.getMdp())) {
+        if (utilisateur != null && encoder.matches(entermdp.getText(), utilisateur.getMdp())) {
             System.out.println("Connexion réussie pour : " + utilisateur.getNom());
             SessionUtilisateur.getInstance().sauvegardeSession(utilisateur);
             error.setVisible(false);

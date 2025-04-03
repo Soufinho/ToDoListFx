@@ -48,18 +48,20 @@ public class SigninController  {
         System.out.println(getnom.getText());
         System.out.println(getprenom.getText());
         Utilisateur utilisateur = utilisateurRepository.getUtilisateurParEmail(getemail.getText());
+        System.out.println(utilisateur);
         if(getemail.getText().isEmpty() || getmdp.getText().isEmpty() || getconfirm.getText().isEmpty() || getnom.getText().isEmpty()) {
             System.out.println("Inscription refusé.");
             erreur.setText("Tous les champs doivent être remplis");
         } else if (!getmdp.getText().equals( getconfirm.getText())) {
             System.out.println("Inscription refusé.");
             erreur.setText("Les mots de passes doivent correspondre");
-        } else if(utilisateurRepository.getUtilisateurParEmail(getemail.getText()) != null) {
+        } else if(utilisateur != null) {
             System.out.println("Inscription refusé.");
             erreur.setText("L'email existe deja dans la base");
         }else{
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             String hashedPassword = encoder.encode(getmdp.getText());
+            utilisateur = new Utilisateur(getnom.getText(),getprenom.getText(),getemail.getText(),hashedPassword,"utilisateur");
             utilisateurRepository.ajouterUtilisateur(utilisateur);
         }
     }

@@ -22,7 +22,7 @@ public class UtilisateurRep {
     }
 
     public void ajouterUtilisateur(Utilisateur utilisateur) {
-        String sql = "INSERT INTO utilisateurs (nom, prenom, email, mdp, role) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO utilisateur (nom, prenom, email, mot_de_passe, role) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, utilisateur.getNom());
@@ -38,29 +38,28 @@ public class UtilisateurRep {
     }
 
     public Utilisateur getUtilisateurParEmail(String email) {
-        String sql = "SELECT * FROM utilisateurs WHERE email = ?";
+        String sql = "SELECT * FROM utilisateur WHERE email = ?";
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, email);
             ResultSet rs = stmt.executeQuery();
             if(rs.next()) {
-                new Utilisateur(
+                return new Utilisateur(
                         rs.getString("nom"),
                         rs.getString("prenom"),
                         rs.getString("email"),
-                        rs.getString("mdp"),
+                        rs.getString("mot_de_passe"),
                         rs.getString("role")
                 );
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
         return null;
     }
 
     public ArrayList<Utilisateur> getTousLesUtilisateurs() {
-        String sql = "SELECT * FROM utilisateurs";
+        String sql = "SELECT * FROM utilisateur";
         ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
         try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
@@ -84,7 +83,7 @@ public class UtilisateurRep {
     }
 
     public void supprimerUtilisateurParEmail(String email) {
-        String sql = "DELETE FROM utilisateurs WHERE email = ?";
+        String sql = "DELETE FROM utilisateur WHERE email = ?";
         try{
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, email);
@@ -105,7 +104,7 @@ public class UtilisateurRep {
     }
 
     public void mettreAJourUtilisateur(Utilisateur utilisateur) {
-        String sql = "UPDATE utilisateurs SET nom = ?, prenom = ?, role = ? WHERE email = ?";
+        String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, role = ? WHERE email = ?";
         try{
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, utilisateur.getNom());
