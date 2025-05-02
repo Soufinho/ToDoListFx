@@ -1,5 +1,6 @@
 package appli.Accueil;
 
+import appli.StartApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -9,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.Utilisateur;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,14 +25,21 @@ public class GestionUserController implements Initializable {
     private Button supp;
 
     @FXML
-    void cliqueTableauEvent(MouseEvent event) {
+    void cliqueTableauEvent(MouseEvent event) throws IOException {
         Utilisateur selection = tableauUser.getSelectionModel().getSelectedItem();
         if (selection != null) {
             supp.setDisable(false);
         }else{
             supp.setDisable(true);
         }
+
+        if (event.getClickCount() == 2) { // Vérifie si c'est un double-clic
+            if (selection != null) {
+                StartApplication.changeScene("Accueil/modificationUser");
+            }
+        }
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String [][] colonnes = new String[][]{
