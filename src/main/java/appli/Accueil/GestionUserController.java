@@ -2,9 +2,11 @@ package appli.Accueil;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import model.Utilisateur;
 
 import java.net.URL;
@@ -14,16 +16,21 @@ public class GestionUserController implements Initializable {
     @FXML
     private TableView<Utilisateur> tableauUser;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // Code d'initialisation exécuté automatiquement au chargement de la vue
-    }
-}
-
-class TableViewController implements Initializable {
     @FXML
-    private TableView<Utilisateur> tableauUser;
+    private Button deco;
 
+    @FXML
+    private Button supp;
+
+    @FXML
+    void cliqueTableauEvent(MouseEvent event) {
+        Utilisateur selection = tableauUser.getSelectionModel().getSelectedItem();
+        if (selection != null) {
+            supp.setDisable(false);
+        }else{
+            supp.setDisable(true);
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         String [][] colonnes = new String[][]{

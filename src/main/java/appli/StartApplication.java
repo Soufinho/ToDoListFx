@@ -16,7 +16,7 @@ public class StartApplication extends Application {
         FXMLLoader fxmlLoader = new
                 FXMLLoader(StartApplication.class.getResource("accueil/loginView.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        mainStage.setTitle("Hello!");
+        mainStage.setTitle("ToDoList");
         mainStage.setScene(scene);
         mainStage.show();
     }

@@ -51,6 +51,7 @@ public class LoginController {
         Utilisateur utilisateurActuel = SessionUtilisateur.getInstance().getUtilisateur();
         if (utilisateurActuel != null) {
             System.out.println("Utilisateur connecté : " + utilisateurActuel.getNom());
+            StartApplication.changeScene("Accueil/GestionUser");
         }
 
 

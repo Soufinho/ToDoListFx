@@ -6,10 +6,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.Accueil.GestionUserController">
    <children>
-      <TableView fx:id="tableauUser" layoutY="46.0" prefHeight="353.0" prefWidth="441.0" />
+      <TableView fx:id="tableauUser" layoutY="46.0" onMouseClicked="#cliqueTableauEvent" prefHeight="353.0" prefWidth="441.0" />
       <Label layoutX="23.0" layoutY="14.0" text="Gestion des utilisateurs">
          <font>
             <Font size="20.0" />
