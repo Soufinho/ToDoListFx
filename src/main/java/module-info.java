@@ -10,4 +10,5 @@ module appli.javafxtodolist {
     exports appli;
     exports appli.Accueil;
     opens appli.Accueil to javafx.fxml;
+    opens model to javafx.base;
 }

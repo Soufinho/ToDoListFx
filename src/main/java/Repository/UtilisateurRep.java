@@ -15,7 +15,6 @@ import static database.Database.getConnexion;
 
 public class UtilisateurRep {
     private Connection connexion;
-    private TableView<Object> tableauUser;
 
     public UtilisateurRep() {
         this.connexion= getConnexion();
@@ -66,14 +65,14 @@ public class UtilisateurRep {
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 Utilisateur u = new Utilisateur(
+                        rs.getInt("id_utilisateur"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
                         rs.getString("email"),
-                        rs.getString("mdp"),
+                        rs.getString("mot_de_passe"),
                         rs.getString("role")
                 );
                 utilisateurs.add(u);
-                tableauUser.getItems().addAll(utilisateurs);
             }
             return utilisateurs;
         } catch (SQLException e) {

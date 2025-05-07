@@ -1,5 +1,6 @@
 package appli.Accueil;
 
+import Repository.UtilisateurRep;
 import appli.StartApplication;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.Utilisateur;
+import session.SessionUtilisateur;
 
 import java.io.IOException;
 import java.net.URL;
@@ -47,6 +49,7 @@ public class GestionUserController implements Initializable {
 
     @FXML
     protected void onDeconnexionButtonClick() throws IOException {
+        SessionUtilisateur.getInstance().deconnecter();
         StartApplication.changeScene("Accueil/Login");
         System.out.println("Vous êtes en cours de redirection");
     }
@@ -57,7 +60,7 @@ public class GestionUserController implements Initializable {
                 {"Id Utilisateur", "idUser"},
                 {"Nom", "nom"},
                 {"Prénom", "prenom"},
-                {"Email", "mail"},
+                {"Email", "Email"},
                 {"Rôle", "role"},
         };
 
@@ -70,6 +73,8 @@ public class GestionUserController implements Initializable {
             //Ajout de la colonne dans notre tableau
             tableauUser.getColumns().add(maCol);
         }
+        UtilisateurRep utilisateurRep = new UtilisateurRep();
+        tableauUser.getItems().addAll(utilisateurRep.getTousLesUtilisateurs());
     }
 }
 

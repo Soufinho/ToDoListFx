@@ -6,7 +6,7 @@ public  class Utilisateur  {
     private String prenom;
     private String email;
     private String mdp;
-    private int id;
+    private int idUser;
     private String role;
 
 
@@ -17,17 +17,17 @@ public  class Utilisateur  {
                 ", prenom='" + prenom + '\'' +
                 ", email='" + email + '\'' +
                 ", mdp='" + mdp + '\'' +
-                ", id=" + id +
+                ", id=" + idUser +
                 ", role='" + role + '\'' +
                 '}';
     }
 
-    public Utilisateur(String nom, String prenom, String email, String mdp, int id, String role) {
+    public Utilisateur( int id,String nom, String prenom, String email, String mdp, String role) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.mdp = mdp;
-        this.id = id;
+        this.idUser = id;
         this.role = role;
 }
 
@@ -77,12 +77,12 @@ public Utilisateur(String mdp, String email) {
         this.mdp = mdp;
     }
 
-    public int getId() {
-        return id;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getRole() {
