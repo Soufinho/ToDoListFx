@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="appli.Accueil.ModificationUserView"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="498.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="appli.Accueil.ModificationUserView">
+   <children>
+      <Label layoutX="23.0" layoutY="14.0" prefHeight="38.0" prefWidth="477.0" text="Modification du profil utilisateur">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="479.0" layoutY="450.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Valider" />
+      <Button layoutX="339.0" layoutY="450.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="88.0" text="Annuler" />
+      <Label layoutX="44.0" layoutY="82.0" text="Changer le nom:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="172.0" text="Changer le prenom:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="46.0" layoutY="264.0" text="Changer l'email:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="47.0" layoutY="359.0" text="Changer le role:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="modifnom" layoutX="46.0" layoutY="104.0" />
+      <TextField fx:id="modifprenom" layoutX="46.0" layoutY="194.0" />
+      <TextField fx:id="modifemail" layoutX="46.0" layoutY="286.0" />
+      <TextField fx:id="modifrole" layoutX="46.0" layoutY="381.0" />
+   </children>
 </AnchorPane>

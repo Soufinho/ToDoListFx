@@ -15,6 +15,6 @@
          </font>
       </Label>
       <Button fx:id="deco" layoutX="475.0" layoutY="16.0" mnemonicParsing="false" text="Deconnexion" />
-      <Button fx:id="supp" layoutX="449.0" layoutY="339.0" mnemonicParsing="false" onMouseClicked="#cliqueSupp" text="Supprimer" />
+      <Button fx:id="supp" layoutX="449.0" layoutY="339.0" mnemonicParsing="false" text="Supprimer" />
    </children>
 </AnchorPane>

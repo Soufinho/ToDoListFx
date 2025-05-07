@@ -35,9 +35,13 @@ public class GestionUserController implements Initializable {
 
         if (event.getClickCount() == 2) { // Vérifie si c'est un double-clic
             if (selection != null) {
-                StartApplication.changeScene("Accueil/modificationUser");
+                StartApplication.changeScene("Accueil/ModificationUser");
+                ModificationUserController controller = (ModificationUserController)
+                        StartApplication. getControllerFromStage();
+                controller.initData(selection);
             }
         }
+
     }
 
     @Override
