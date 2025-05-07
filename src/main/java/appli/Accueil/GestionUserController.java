@@ -1,6 +1,7 @@
 package appli.Accueil;
 
 import appli.StartApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -42,6 +43,12 @@ public class GestionUserController implements Initializable {
             }
         }
 
+    }
+
+    @FXML
+    protected void onDeconnexionButtonClick() throws IOException {
+        StartApplication.changeScene("Accueil/Login");
+        System.out.println("Vous êtes en cours de redirection");
     }
 
     @Override
