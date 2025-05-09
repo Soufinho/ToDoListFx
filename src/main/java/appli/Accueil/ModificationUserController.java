@@ -1,9 +1,13 @@
 package appli.Accueil;
 
+import Repository.UtilisateurRep;
+import appli.StartApplication;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.Utilisateur;
 
+import java.io.IOException;
 import java.lang.classfile.Label;
 
 public class ModificationUserController {
@@ -28,4 +32,9 @@ public class ModificationUserController {
         modifrole.setText( utilisateur.getRole());
     }
 
+
+    public void clickannuler (ActionEvent actionEvent) throws IOException {
+        StartApplication.changeScene("Accueil/GestionUser");
+        System.out.println("Vous êtes en cours de redirection");
+    }
 }
