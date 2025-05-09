@@ -76,5 +76,17 @@ public class GestionUserController implements Initializable {
         UtilisateurRep utilisateurRep = new UtilisateurRep();
         tableauUser.getItems().addAll(utilisateurRep.getTousLesUtilisateurs());
     }
+
+    public void deleteClicked(ActionEvent actionEvent) {
+        Utilisateur selection = tableauUser.getSelectionModel().getSelectedItem();
+        if (selection != null) {
+            UtilisateurRep utilisateurRep = new UtilisateurRep();
+            utilisateurRep.supprimerUtilisateurParEmail(selection.getEmail());
+
+            tableauUser.getItems().remove(selection);
+            supp.setDisable(true);
+        }
+    }
+
 }
 

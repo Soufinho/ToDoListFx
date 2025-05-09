@@ -83,24 +83,20 @@ public class UtilisateurRep {
 
     public void supprimerUtilisateurParEmail(String email) {
         String sql = "DELETE FROM utilisateur WHERE email = ?";
-        try{
+        try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, email);
-            ResultSet rs = stmt.executeQuery();
-            if(rs.next()) {
-                new Utilisateur(
-                        rs.getString("nom"),
-                        rs.getString("prenom"),
-                        rs.getString("email"),
-                        rs.getString("mdp"),
-                        rs.getString("role")
-                );
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected > 0) {
                 System.out.println("L'utilisateur a été supprimé.");
+            } else {
+                System.out.println("Aucun utilisateur trouvé avec cet email.");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erreur lors de la suppression de l'utilisateur : " + e.getMessage());
         }
     }
+
 
     public void mettreAJourUtilisateur(Utilisateur utilisateur) {
         String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, role = ? WHERE email = ?";
