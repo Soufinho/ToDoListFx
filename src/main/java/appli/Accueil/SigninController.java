@@ -40,7 +40,7 @@ public class SigninController  {
 
 
     @FXML
-    protected void onInscriptionButtonClick() {
+    protected void onInscriptionButtonClick() throws IOException {
 
         System.out.println(getemail.getText());
         System.out.println(getmdp.getText());
@@ -63,6 +63,7 @@ public class SigninController  {
             String hashedPassword = encoder.encode(getmdp.getText());
             utilisateur = new Utilisateur(getnom.getText(),getprenom.getText(),getemail.getText(),hashedPassword,"utilisateur");
             utilisateurRepository.ajouterUtilisateur(utilisateur);
+            StartApplication.changeScene("Accueil/Login");
         }
     }
 
