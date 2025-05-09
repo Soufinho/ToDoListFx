@@ -100,14 +100,17 @@ public class UtilisateurRep {
 
     public void mettreAJourUtilisateur(Utilisateur utilisateur) {
         String sql = "UPDATE utilisateur SET nom = ?, prenom = ?, role = ? WHERE email = ?";
-        try{
+        try {
             PreparedStatement stmt = connexion.prepareStatement(sql);
             stmt.setString(1, utilisateur.getNom());
             stmt.setString(2, utilisateur.getPrenom());
             stmt.setString(3, utilisateur.getRole());
             stmt.setString(4, utilisateur.getEmail());
+            stmt.executeUpdate();
+            System.out.println("Utilisateur mis à jour avec succès !");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Erreur lors de la mise à jour de l'utilisateur : " + e.getMessage());
         }
     }
+
 }

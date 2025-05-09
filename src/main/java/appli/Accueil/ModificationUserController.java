@@ -37,4 +37,17 @@ public class ModificationUserController {
         StartApplication.changeScene("Accueil/GestionUser");
         System.out.println("Vous êtes en cours de redirection");
     }
+
+
+    public void submitclick(ActionEvent actionEvent) throws IOException {
+        utilisateurSel.setNom(modifnom.getText());
+        utilisateurSel.setPrenom(modifprenom.getText());
+        utilisateurSel.setRole(modifrole.getText());
+
+        UtilisateurRep utilisateurRep = new UtilisateurRep();
+        utilisateurRep.mettreAJourUtilisateur(utilisateurSel);
+
+        StartApplication.changeScene("Accueil/GestionUser");
+        System.out.println("Utilisateur modifié avec succès !");
+    }
 }
